@@ -17,9 +17,8 @@ def find_max_profit_naive(prices):
                 max_profit_so_far = potential_profit
     return max_profit_so_far
 
-# Optimized O(n)
 
-
+# Faster Naive Optimized O(n^2)
 def find_max_profit(prices):
     # Set max_profit_so_far
     max_profit_so_far = prices[1] - prices[0]
@@ -36,7 +35,26 @@ def find_max_profit(prices):
     return max_profit_so_far
 
 
-print(find_max_profit([1050, 270, 1540, 3800, 2]))
+# Optimized "Greedy" Algorithm O(n)
+def find_max_profit_optimized(prices):
+    # Set max_profit_so_far and min_price
+    max_profit_so_far = prices[1] - prices[0]
+    min_price = prices[0]
+
+    for i in range(1, len(prices)):
+        # Set current_buy_price
+        current_price = prices[i]
+        # Calculate difference
+        potential_profit = current_price - min_price
+        # Check which is buy/sell is higher and set it
+        max_profit_so_far = max(potential_profit, max_profit_so_far)
+        # Check which is the lower buy price
+        min_price = min(min_price, current_price)
+
+    return max_profit_so_far
+
+
+print(find_max_profit_optimized([1050, 270, 1540, 3800, 2]))
 
 if __name__ == '__main__':
     # This is just some code to accept inputs from the command line
