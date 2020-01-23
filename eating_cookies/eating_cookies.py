@@ -31,29 +31,25 @@ def eating_cookies(n, cache={0: 1, 1: 1, 2: 2, 3: 4}):
         return cache[n]
 
 
-print(eating_cookies(5))
+# print(eating_cookies(5))
 
 
-# Iterative Bottom-Down Approach O(n) -- Needs work/refinement
+# Iterative Bottom-Down Approach O(n)
 def eating_cookies_iterative(n):
-    # Base Case
-    if n <= 2:
-        return n
-    elif n == 3:
-        return 4
-    # Set cookie conditions for n == 3
-    #
-    one_cookie = 4
-    two_cookie = 2
-    three_cookie = 1
-
-    for i in range(3, n):
-        current = one_cookie + two_cookie + three_cookie
-        three_cookie = two_cookie
-        two_cookie = one_cookie
-        one_cookie = current
-
-    return current
+    if n == 0:
+        return 1
+    # Set conditions for all base cases
+    n_3 = 4
+    n_2 = 2
+    n_1 = 1
+    # Loop through adding all conditions
+    # Setting each condition to the adjacent one
+    for i in range(n - 3):
+        result = n_1 + n_2 + n_3
+        n_1 = n_2
+        n_2 = n_3
+        n_3 = result
+    return result
 
 
 print(eating_cookies_iterative(5))
